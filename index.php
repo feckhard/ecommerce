@@ -1,21 +1,20 @@
 <?php 
+	require_once("vendor/autoload.php");
 
-require_once("vendor/autoload.php");
+	use Hcode\DB\Sql;
+	use Hcode\DB\Page;
 
-$app = new \Slim\Slim();
+	$app = new \Slim\Slim();
 
-$app->config('debug', true);
+	$app->config('debug', true);
 
-$app->get('/', function() {
-    
-	$sql = new Hcode\DB\Sql();
+	$app->get('/', function() {
+		
+		$page = new Page();
 
-	$results = $sql->select("SELECT * FROM TB_USERS");
+		$page->setTpl("index");
 
-	echo json_encode($results);
+	});
 
-});
-
-$app->run();
-
- ?>
+	$app->run();
+?>
